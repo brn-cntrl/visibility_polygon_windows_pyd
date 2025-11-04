@@ -1,0 +1,31 @@
+name: Build Windows Extension
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:  # Allows manual trigger from GitHub UI
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install pybind11
+        run: pip install pybind11
+      
+      - name: Build extension
+        run: python setup.py build_ext --inplace
+      
+      - name: Upload .pyd file
+        uses: actions/upload-artifact@v3
+        with:
+          name: visibility-polygon-windows
+          path: visibility_polygon*.pyd
