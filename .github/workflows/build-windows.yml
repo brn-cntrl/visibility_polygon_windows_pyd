@@ -3,7 +3,7 @@ name: Build Windows Extension
 on:
   push:
     branches: [ main, master ]
-  workflow_dispatch:  # Allows manual trigger from GitHub UI
+  workflow_dispatch:
 
 jobs:
   build-windows:
@@ -11,7 +11,7 @@ jobs:
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -25,7 +25,7 @@ jobs:
         run: python setup.py build_ext --inplace
       
       - name: Upload .pyd file
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: visibility-polygon-windows
           path: visibility_polygon*.pyd
