@@ -8,6 +8,14 @@ clipper2_sources = [
     "clipper.rectclip.cpp",
 ]
 
+# Prepare extra link args for macOS
+extra_link_args = []
+if sys.platform == "darwin":
+    extra_link_args = [
+        "-Wl,-rpath,/usr/lib",  # Use system libraries
+        "-Wl,-rpath,/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib",
+    ]
+
 ext_modules = [
     Pybind11Extension(
         "visibility_polygon",
@@ -24,6 +32,7 @@ ext_modules = [
             "-O3",
             "-fPIC",
         ] + (["-arch", "arm64"] if sys.platform == "darwin" else []),
+        extra_link_args=extra_link_args,  # Add this line
         language="c++",
     ),
 ]
