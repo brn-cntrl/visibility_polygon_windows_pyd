@@ -8,11 +8,10 @@ clipper2_sources = [
     "clipper.rectclip.cpp",
 ]
 
-# Prepare extra link args for macOS
 extra_link_args = []
 if sys.platform == "darwin":
     extra_link_args = [
-        "-Wl,-rpath,/usr/lib",  # Use system libraries
+        "-Wl,-rpath,/usr/lib",  
         "-Wl,-rpath,/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib",
     ]
 
@@ -24,15 +23,15 @@ ext_modules = [
             "VisibilityPolygon.cpp",
         ] + clipper2_sources,
         include_dirs=[
-            ".",  # For VisibilityPolygon.h
-            "clipper2",  # For clipper2 header files
+            ".",  
+            "clipper2",  
         ],
         extra_compile_args=[
             "-std=c++17",
             "-O3",
             "-fPIC",
         ] + (["-arch", "arm64"] if sys.platform == "darwin" else []),
-        extra_link_args=extra_link_args,  # Add this line
+        extra_link_args=extra_link_args,  
         language="c++",
     ),
 ]

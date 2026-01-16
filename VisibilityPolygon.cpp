@@ -28,18 +28,15 @@ bool segmentsIntersect(const Segment& s1, const Segment& s2, Point& intersection
 	
 	double den = (y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1);
 	
-	// If den is zero, the segments are parallel or collinear
 	if (den == 0) {
 		return false;
 	}
 	
-	// Calculate the numerators
 	double ua = ((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) / den;
 	double ub = ((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) / den;
 	
 	// If ua and ub are both between 0 and 1, segments intersect
 	if (ua >= 0 && ua <= 1 && ub >= 0 && ub <= 1) {
-		// Calculate the intersection point
 		intersection.x = x1 + ua * (x2 - x1);
 		intersection.y = y1 + ua * (y2 - y1);
 		return true;
@@ -264,7 +261,7 @@ bool polygonsOverlap(const Polygon2& poly1, const Polygon2& poly2) {
 	
 	double centerDistance = distance(centroid1, centroid2);
 	if (centerDistance > radius1 + radius2) {
-		return false; // Definitely not overlapping
+		return false; 
 	}
 	
 	for (const auto& v : poly1.vertices) {

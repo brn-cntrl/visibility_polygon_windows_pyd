@@ -83,7 +83,6 @@ enum IsovistMetric {
 	MEAN_RADIAL_DISTANCE    // Average distance to visibility boundary
 };
 
-// Add this with your other function declarations
 std::vector<Point> clipCircleWithVisibilityPolygon(const std::vector<Point>& polygon,
 												   const Point& circleCenter,
 												   double radius,
